@@ -32,7 +32,7 @@ m_GAMMA = e_data[:, 5] # electron Gamma_j
 gamma_r = hdf5_file.root.runInfo._v_attrs.gamma_r
 gamma_j = gamma_r * m_GAMMA
 energy_spread = (gamma_j - gamma_r) * 100 / gamma_r # in the unit of percentage
-
+rho = hdf5_file.root.runInfo._v_attrs.rho
 
 meshsizeZ2 = hdf5_file.root.runInfo._v_attrs.sLengthOfElmZ2
 nZ2 = hdf5_file.root.runInfo._v_attrs.nZ2
@@ -42,7 +42,7 @@ print("nz2 =", nZ2)
 modelLengthInZ2 = nZ2*meshsizeZ2
 Lc = hdf5_file.root.runInfo._v_attrs.Lc
 lambda_r = hdf5_file.root.runInfo._v_attrs.lambda_r
-modelLengthInlambda = lambda_r*modelLengthInZ2/Lc
+modelLengthInlambda = modelLengthInZ2/(4*np.pi*rho)
 print("model length in lambda =", modelLengthInlambda)
 
 numelec = np.shape(e_data)[0]
